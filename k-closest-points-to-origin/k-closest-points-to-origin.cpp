@@ -2,35 +2,17 @@ class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
  
-        
-        vector< pair< int, vector<int> > > temp;
-        
-        for(auto i: points){
-            int len = i[0]*i[0] + i[1]*i[1];
-            temp.push_back({len, i});
-        }
-        
-        sort(temp.begin(), temp.end());
-        
-        for(auto i: temp){
-            for(auto j : i.second){
-                cout << j << " ";
-                
-                cout << i.first << endl;
-            }
-        }
-            
-            
-        
+        sort(points.begin(), points.end(), cmp);
         
         vector< vector<int> > res;
-            
-        int n=temp.size();
         
-        for(int i=0; i<k; i++){
-            res.push_back(temp[i].second);
-        }
+        for(int i=0; i<k; i++)
+            res.push_back(points[i]);
         
         return res;
+    }
+    
+    static bool cmp(vector<int>&p, vector<int>&q){
+        return (p[0]*p[0]+p[1]*p[1]) < (q[0]*q[0]+q[1]*q[1]);
     }
 };
