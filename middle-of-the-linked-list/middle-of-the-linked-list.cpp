@@ -11,21 +11,13 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        ListNode* temp=head;
-        int k=0;
         
-        while(temp){
-            k++;
-            temp=temp->next;
-        }
+        vector<ListNode*> col {head};
         
-        k = ceil(k/2);
+        while(col.back()->next)
+            col.push_back(col.back()->next);
         
-        temp=head;
-        while(k--)
-            temp=temp->next;
-        
-        return temp;
+        return col[col.size()/2] ;
             
     }
 };
