@@ -3,6 +3,9 @@ public:
     bool isPowerOfTwo(int n) {
         if(n<=0)
             return false;
-        return (ceil(log2(n)) == floor(log2(n)));
+        int sbc = __builtin_popcount(n);
+        if(sbc==1)
+            return true;
+        return false;
     }
 };
