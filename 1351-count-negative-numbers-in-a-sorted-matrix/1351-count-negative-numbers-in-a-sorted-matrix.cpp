@@ -18,9 +18,6 @@ public:
                 i++;
             }
             
-            cout << "current res: " << res << endl;
-            cout << "current i: " << i << endl ;
-            cout << "current j: " << i << endl << endl;
         }
         
         return res;
