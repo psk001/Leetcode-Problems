@@ -8,8 +8,9 @@ public:
         int i=0, j=height.size()-1;
         
         while(i<j){
-            int curCap = min(height[i], height[j])*(j-i);
-            res=max(res, curCap);
+           // int curCap = min(height[i], height[j])*(j-i);
+            res=max(res, min(height[i], height[j])*(j-i));
+            
             if(height[j]<height[i])
                 j--;
             
