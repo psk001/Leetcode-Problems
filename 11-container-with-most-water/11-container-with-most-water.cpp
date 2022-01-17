@@ -10,7 +10,6 @@ public:
         while(i<j){
             int curCap = min(height[i], height[j])*(j-i);
             res=max(res, curCap);
-            // cout << "res: " << res << " curCap: " << curCap << endl;
             if(height[j]<height[i])
                 j--;
             
