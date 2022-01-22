@@ -11,26 +11,52 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        if (not head)
+        if(not head or not head->next)
             return head;
-        vector<int> col;
         
-        ListNode* temp=head;
-        while(temp){
-            col.push_back(temp->val);
-            temp = temp->next;
+        ListNode* mid=getMid(head);
+        ListNode* left=sortList(head);
+        ListNode* right=sortList(mid);
+        
+        return merge(left, right);
+    }
+    
+    ListNode* merge(ListNode* head1, ListNode* head2){
+        ListNode temp(0);
+        ListNode* ptr=&temp;
+        
+        while(head1 and head2){
+            if(head1->val < head2->val){
+                ptr->next=head1;
+                head1=head1->next;
+            }
+            else{
+                ptr->next=head2;
+                head2=head2->next;
+            }
+            ptr=ptr->next;                
         }
         
-        sort(col.begin(), col.end());
-        temp=head;
-        int i=0;
+        if(head1)
+            ptr->next=head1;
+        else
+            ptr->next=head2;
         
-        while(temp){
-            temp->val = col[i];
-            i++;
-            temp=temp->next;
+        return temp.next;
+        
+    }
+    
+    ListNode* getMid(ListNode* head){
+        ListNode* prev=NULL;
+        
+        while(head and head->next){
+            prev=(prev==NULL) ? head : prev->next;
+            head=head->next->next;
         }
         
-        return head;
+        ListNode* mid=prev->next;
+        prev->next=NULL;
+        
+        return mid;
     }
 };
