@@ -11,13 +11,14 @@ public:
         while(i<n-1 and a[i]<a[i+1] )
             i++;
         
-      //  cout <<"max id: " << i << endl;
         if(i==n-1 or i==0)
             return false;
         
         while(i<n-1 and a[i]>a[i+1] )
             i++;
+        if(i==n-1)
+            return true;
         
-        return i==n-1;
+        return false;
     }
 };
