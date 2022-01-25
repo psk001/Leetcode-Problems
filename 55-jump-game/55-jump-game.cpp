@@ -10,7 +10,10 @@ public:
             reqSteps++;
         }
         
-        return (reqSteps==1);
+        if(reqSteps==1)
+            return true;
+        
+        return false;
     } 
     
 
