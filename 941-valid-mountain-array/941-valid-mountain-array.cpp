@@ -17,10 +17,7 @@ public:
         
         while(i<n-1 and a[i]>a[i+1] )
             i++;
-      //  cout <<"curr id: " << i << endl;
-        if(i==n-1)
-            return true;
         
-        return false;
+        return i==n-1;
     }
 };
