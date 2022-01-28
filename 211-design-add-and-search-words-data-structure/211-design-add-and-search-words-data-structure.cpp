@@ -1,41 +1,33 @@
 class WordDictionary {
-    vector<WordDictionary*> child;
-    bool isEnd;
+    unordered_map<int, vector<string> > col;
+    bool isEqual(string s1, string s2){
+        for(int i=0; i<s1.size(); i++){
+            if(s1[i]=='.')
+                continue;
+            else if(s1[i]!=s2[i])
+                return false;               
+        }
+        return true;
+    };
     
 public:
-    WordDictionary():isEnd(false) {
-        child = vector<WordDictionary* > (26, nullptr);        
+    WordDictionary(){        
     }
     
     void addWord(string word) {
-        WordDictionary* temp=this;
-        for(auto c: word){
-            if(temp->child[c-'a']==nullptr)
-                temp->child[c-'a']=new WordDictionary();
-            temp=temp->child[c-'a'];
-        }
-        temp->isEnd=true;
-        
+        col[word.size()].push_back(word);        
         return;
     }
     
     bool search(string word) {
-        WordDictionary* temp=this;
-        for(int i=0; i<word.size(); i++){
-            char c=word[i];
-            if(c=='.'){
-                for(auto ch: temp->child)
-                    if(ch and ch->search(word.substr(i+1)))
-                        return true;
-                return false;
-            }
-            if(temp->child[c-'a']==nullptr)
-                return false;
-            
-            temp=temp->child[c-'a'];
+        int k=word.size();
+        bool res=false;
+        for(auto &&i: col[k]){
+            if(isEqual(word, i))
+                return true;
         }
         
-        return (temp and temp->isEnd);
+        return res;
     }
 };
 
