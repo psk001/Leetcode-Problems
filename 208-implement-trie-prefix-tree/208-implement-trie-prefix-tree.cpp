@@ -20,6 +20,8 @@ class Trie {
                     temp=temp->child[c-'a'];
             }
             temp->isEnd=true;
+            
+            return;
         }
 
         bool search(string word) {
