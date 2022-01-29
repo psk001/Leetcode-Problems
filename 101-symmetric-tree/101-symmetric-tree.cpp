@@ -23,12 +23,8 @@ public:
             return true;
         
         if(root1 and root2){
-           // cout << "left and right trees exist\nnode value: " << root->left->val << endl;
-            
-            if(root1->val==root2->val){
-              //   cout << "left and right values are equal\n";
+            if(root1->val==root2->val)
                 return (check(root1->left, root2->right) and (check(root1->right, root2->left)));
-            }
         }
         return false;
     }
