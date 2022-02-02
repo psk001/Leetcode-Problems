@@ -1,22 +1,24 @@
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
-        if(k==nums.size() || k==0)
+        cout << "nums size: " << nums.size() << endl;
+        if(k==0 || k==nums.size())
             return;
         
         if(k>nums.size())
-            k %= nums.size();
+            k%=nums.size();
+    
+        vector<int> temp;
+                
+        for(int i=nums.size()-k; i<nums.size(); i++){
+            temp.push_back(nums[i]);
+        }
         
-        auto start = nums.begin() + nums.size()-k;
-        auto end = nums.end();
-
-        vector<int> result(k);
-        nums.erase(start, end);
-
-        copy(start, end, result.begin());
+        for(int i=0; i<nums.size()-k; i++)
+            temp.push_back(nums[i]);
         
-        nums.insert(nums.begin(), result.begin(), result.end());
-
+        nums=temp;
+        
         return;
     }
 };
