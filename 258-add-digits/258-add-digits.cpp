@@ -1,8 +1,22 @@
 class Solution {
 public:
-    int addDigits(int n) {
-        if(n==0) return 0;
-       // if(n%9==0)return 9;
-        else return 1+(n-1)%9;
+    int addDigits(int num) {
+        int res=INT32_MAX;
+       
+        while(res>=10){
+         
+            int sum=0;
+            while(num){
+                sum+=num%10;
+                num/=10;
+               
+            }
+            cout << "sum: "<<sum;
+            num=sum;
+            res=sum;
+            if(res<10)break;
+        }
+        
+        return res;
     }
 };
