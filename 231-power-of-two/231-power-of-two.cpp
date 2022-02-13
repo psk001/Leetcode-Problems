@@ -4,8 +4,8 @@ public:
         if(n<=0)
             return false;
         
-        int p=log2(n);
+        int p=__builtin_popcount(n);
         
-        return (pow(2, p)==n);
+        return (p==1);
     }
 };
