@@ -4,9 +4,10 @@ public:
         if(s.size()<2)
             return s.size();
         
-        int res=1, start=0, end=1, curr=1;
+        int res=1, curr=1;  // for substr length
+        int start=0, end=1; // indices for string
         
-        unordered_map<char, int> col;
+        unordered_map<char, int> col;   // sorting is not needed
         
         col[s[start]]++;
         
