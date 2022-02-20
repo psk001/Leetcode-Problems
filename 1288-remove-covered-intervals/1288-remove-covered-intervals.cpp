@@ -7,61 +7,22 @@ public:
             return 1;
         
         sort(i.begin(), i.end());
+        int res=1;
+        int x1=i[0][0], x2=i[0][1];
 
-        for(int p=0; p<n;){
-            // cout << "     p: " << p << endl;
+        for(int p=1; p<n; ++p){
                     
-            if(i[p][0]==i[p+1][0]){
-                if(i[p][1]>=i[p+1][1]){
-                    i.erase(i.begin()+p+1);
-                }
-                
-                else if(i[p][1]<i[p+1][1]){
-                    i.erase(i.begin()+p);
-                    //p++;
-                }
-                               
+            if(i[p][0]>x1 and i[p][1]>x2){
+                res++;                               
             }
             
-            else if(i[p][0] < i[p+1][0]){
-                
-                if(i[p][1] >= i[p+1][1]){
-                    i.erase(i.begin()+p+1);
-                }
-
-                else
-                    p++;
-            }
-            
-            else{
-                if(i[p][1]>=i[p+1][1]){
-                    i.erase(i.begin()+p+1);
-                }
-                else
-                    p++;
-            }
-            
-            if(p+1==i.size())
-                break;            
-                        
-//             for(auto p: i)
-//                 cout << p[0] << " " << p[1] << endl; 
-            
-            
-//             cout << "p at the end: " << p << endl;
-//             cout << "size at the end: " << i.size() << endl;
-//             cout << endl;
-
-            if(i.size()<2)
-                break;            
-        }
+            if(i[p][1] > x2){
+                x1 = i[p][0];
+                x2 = i[p][1];
+            }            
+          }
         
-    
-        
-        // for(auto k: i)
-        //     cout << k[0] << " " << k[1] << endl;
-        
-        return i.size();
+        return res;
         
     }
 };
