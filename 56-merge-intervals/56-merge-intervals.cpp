@@ -8,24 +8,13 @@ public:
         
         sort(i.begin(), i.end());
         
-        for(int p=0; p<i.size()-1; p++){
-            if(i[p][1]>=i[p+1][0]){
-                i[p+1][0]=min(i[p][0], i[p+1][0]);
-                i[p+1][1]=max(i[p][1], i[p+1][1]);
-            }                     
-        }
-        map<int, int> col;
-        
-        for(int p=0; p<i.size(); p++){
-            col[i[p][0]]=i[p][1];
+        for(auto p: i){
+            if(res.empty() or res.back()[1]<p[0])
+                res.push_back(p);
+            else
+                res.back()[1]=max(res.back()[1], p[1]);
         }
         
-        for(auto i: col)
-            res.push_back({i.first, i.second});
-        
-        // for (auto k: )
-        //     cout << k[0] << " " << k[1] << endl;
-               
         return res;
         
     }
