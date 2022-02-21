@@ -1,19 +1,25 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
+        if(nums.size()==1)
+            return nums[0];
         
-        map<int, int> col;
+        sort(nums.begin(), nums.end());
+        int curr=nums[0], cnt=1;
         
-        for(auto i: nums)
-            col[i]++;
-        
-        int res;
-        
-        for(auto i: col){
-            if(i.second > floor(nums.size()/2))
-                res = i.first;
+        for(int i=1; i<nums.size(); i++){
+            if(nums[i]==curr){
+                cnt++;
+            }
+            else{
+                curr=nums[i];
+                cnt=1;
+            }
+            
+            if(cnt>nums.size()/2)
+                return curr;
         }
         
-        return res;
+        return -1;
     }
 };
