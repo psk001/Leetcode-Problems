@@ -21,20 +21,22 @@ public:
         q.push(root);
         
         int flag=0;
+        int len;
         
         while(!q.empty()){
             vector<int> tv;
-            vector<TreeNode*> tn;
+            // vector<TreeNode*> tn;
+            len = q.size();
             
-            while(!q.empty()){
+            for(int i=0; i<len; i++){
                 TreeNode* node=q.front();
                 q.pop();
                 
                 tv.push_back(node->val);
                 if(node->left)
-                    tn.push_back(node->left);
+                    q.push(node->left);
                 if(node->right)
-                    tn.push_back(node->right);
+                    q.push(node->right);
             } 
             
             // pushes current level vector into result vector;
@@ -48,8 +50,8 @@ public:
                 flag=1;
             }
             
-            for(auto i: tn)
-                q.push(i);
+            // for(auto i: tn)
+            //     q.push(i);
             
         }
         
