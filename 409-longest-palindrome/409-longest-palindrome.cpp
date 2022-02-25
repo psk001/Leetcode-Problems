@@ -5,29 +5,16 @@ public:
         for(auto i: s)
             col[i]++;
         
-        int om=0;
         int res=0;
         
         for(auto i: col){
-            if(i.second&1 and i.second>om)
-                om=i.second;
+            res += i.second/2 * 2;
             
-            else if(i.second%2==0)
-                res+=i.second;
+            if(res%2==0 and i.second%2==1)
+                res++;
         }
+              
         
-       // res+=om;
-        // cout << "res: " << res << endl;
-        int temp=res, flag=0;
-        for(auto i: col)
-            if(i.second&1 and i.second<=om){
-                temp+=i.second-1;
-                flag=1;
-            }
-        
-        if(flag)
-            temp++;        
-        
-        return temp;        
+        return res;        
     }
 };
