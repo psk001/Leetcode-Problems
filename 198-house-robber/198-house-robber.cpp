@@ -5,21 +5,14 @@ public:
             return nums[0];
         
         vector<int> dp(nums.size(), -1);
-        return rob(nums, dp, 0);
+        dp[0]=nums[0];
+        dp[1]=max(nums[0], nums[1]);
+        
+        for(int i=2; i<nums.size(); i++){
+            dp[i] = max(nums[i]+dp[i-2], dp[i-1]);
+        }
+        
+        return dp[dp.size()-1];
     }
     
-    int rob(vector<int>& nums, vector<int>& dp, int idx){
-        if(idx>=nums.size())
-            return 0;
-        
-        if(dp[idx] != -1)
-            return dp[idx];
-        
-        int tk = nums[idx]+rob(nums, dp, idx+2);
-        int nt = rob(nums, dp, idx+1);
-        
-        dp[idx]=max(tk, nt);
-        
-        return dp[idx];        
-    }
 };
