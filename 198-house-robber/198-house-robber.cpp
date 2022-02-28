@@ -1,19 +1,25 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        vector<int> money(nums.size(), -1);
-                
-        return robber(nums, 0, money);
+        if(nums.size()==1)
+            return nums[0];
+        
+        vector<int> dp(nums.size(), -1);
+        return rob(nums, dp, 0);
     }
     
-    static int robber(vector<int>& nums, int idx, vector<int>& money){ 
-        if(idx >= nums.size())
+    int rob(vector<int>& nums, vector<int>& dp, int idx){
+        if(idx>=nums.size())
             return 0;
         
-        if(money[idx] != -1)
-            return money[idx];
+        if(dp[idx] != -1)
+            return dp[idx];
         
-        money[idx] = max(nums[idx] + robber(nums, idx+2, money),  robber(nums, idx+1, money));
-        return money[idx];
+        int tk = nums[idx]+rob(nums, dp, idx+2);
+        int nt = rob(nums, dp, idx+1);
+        
+        dp[idx]=max(tk, nt);
+        
+        return dp[idx];        
     }
 };
