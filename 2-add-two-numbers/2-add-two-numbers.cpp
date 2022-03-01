@@ -31,9 +31,11 @@ public:
         temp1=temp1->next;
         temp2=temp2->next;
         ListNode* t3;
-        while(temp1 and temp2){
+        while(temp1 or temp2){
             t3 = new ListNode();
-            sm = temp1->val+temp2->val+cr;
+            int p= (temp1!=nullptr) ? temp1->val : 0;
+            int q= (temp2!=nullptr) ? temp2->val : 0;
+            sm = p+q+cr;
             t3->val=sm%10;
             
             cr=sm/10;
@@ -41,33 +43,12 @@ public:
             temp->next=t3;
             temp=t3;
             
-            temp1=temp1->next;
-            temp2=temp2->next;
+            temp1=(temp1 != nullptr) ? temp1->next : nullptr;
+            temp2=(temp2 != nullptr) ? temp2->next : nullptr;
         }
         
-        while(temp1){
-            t3=new ListNode();
-            sm=temp1->val+cr;
-            t3->val=sm%10;
-            cr=sm/10;
-            
-            temp->next=t3;
-            temp=t3;
-            
-            temp1=temp1->next;
-        }
-        
-        while(temp2){
-            t3=new ListNode();
-            sm=temp2->val+cr;
-            t3->val=sm%10;
-            cr=sm/10;
-            
-            temp->next=t3;
-            temp=t3;
-            
-            temp2=temp2->next;
-        }        
+
+      
         
         if(cr>0){
             t3= new ListNode(cr);
