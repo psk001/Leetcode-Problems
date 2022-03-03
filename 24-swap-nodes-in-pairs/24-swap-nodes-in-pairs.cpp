@@ -13,18 +13,11 @@ public:
     ListNode* swapPairs(ListNode* head) {
         if(not head or not head->next)
             return head;
-    
+        
         ListNode* temp=head->next;
         head->next=swapPairs(head->next->next);
         temp->next=head;
         return temp;
+            
     }
-    
-    // void display(ListNode* t){
-    //     while(t){
-    //         cout << t->val << " " ;
-    //         t=t->next;
-    //     }
-    //     cout << endl;
-    // }
 };
