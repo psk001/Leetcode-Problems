@@ -1,54 +1,18 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     void reorderList(ListNode* head) {
-        if(not head or not head->next)
+        if(!head || !head->next || !head->next->next) 
             return;
         
-        ListNode* first=head, *second, *slast, *last;
+        ListNode* slast = head;
+        while (slast->next->next) 
+            slast=slast->next;
         
-     
-        while(first){
-            second=first->next;
-            
-            slast=getSecondLast(first);
-            
-            if(not slast)
-                return;
-            
-            last=slast->next;
-            if(last==nullptr){
-                cout << "last pointer is null\n";
-                break;
-            }
-                
-            slast->next=nullptr;
-            first->next=last;
-            last->next=second;
-            
-            first=second;
-        }
+        slast->next->next = head->next;
+        head->next = slast->next;
         
-        return;
+        slast->next = NULL;
         
-    }
-    
-    ListNode* getSecondLast(ListNode* head){
-        if(not head or not head->next or not head->next->next)
-            return nullptr;
-        
-        while(head->next->next)
-            head=head->next;
-        
-        return head;            
+        reorderList(head->next->next);
     }
 };
