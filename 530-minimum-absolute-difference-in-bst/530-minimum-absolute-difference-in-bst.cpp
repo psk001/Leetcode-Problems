@@ -17,9 +17,7 @@ public:
             return 0;
         
         itr(root);
-        
-        sort(val.begin(), val.end());
-        
+
         int res=INT_MAX;
         for(int i=0; i<val.size()-1; i++)
             res=min(res, abs(val[i]-val[i+1]));
@@ -31,9 +29,8 @@ public:
         if(not root)
             return;
         
-        val.push_back(root->val);
-        
         itr(root->left);
+        val.push_back(root->val);
         itr(root->right);
     }
     
