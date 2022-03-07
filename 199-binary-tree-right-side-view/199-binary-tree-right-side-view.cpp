@@ -23,13 +23,12 @@ public:
         q.push(root);
         
         while(!q.empty()){
-            vector<int> tm;
             len=q.size();
             int k;
             for(int i=0; i<len; i++){
                 TreeNode* temp=q.front();
                 q.pop();
-                tm.push_back(temp->val);
+              
                 k=temp->val;
                 if(temp->left)
                     q.push(temp->left);
