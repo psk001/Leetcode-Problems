@@ -11,10 +11,10 @@
  */
 class Solution {
 public:
-    vector<int> in;
     int minDiffInBST(TreeNode* root) {
 
-        inr(root);
+        vector<int> in;
+        inr(root, in);
         int res=INT_MAX;
         
         for(int i=0; i<in.size()-1; i++)
@@ -24,12 +24,12 @@ public:
         
     }
     
-    void inr(TreeNode* root){
+    void inr(TreeNode* root, vector<int>& in){
         if(not root)
             return;
         
-        inr(root->left);
+        inr(root->left, in);
         in.push_back(root->val);
-        inr(root->right);
+        inr(root->right, in);
     }
 };
