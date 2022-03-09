@@ -1,29 +1,32 @@
 class Solution {
 public:
-    int minimumTotal(vector<vector<int>>& t) {
-        int n=t.size();
-        vector<vector<int>> dp(n+1,vector<int> (n+1,-1));
-        return getMin(dp, t, 0, 0, n);
+    int minimumTotal(vector<vector<int>>& triangle) {
+        // if(triangle.size()==1)
+        //     return triangle[0][0];
         
+        int n=triangle.size();
+        vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
+       
+        return sum(triangle, 0, 0, dp, n);
+
     }
     
-    int getMin(vector<vector<int>>& dp, vector<vector<int>>& t, int cr, int cl, int n){
-        if(cl>=n || cl<0) 
+    int sum(vector<vector<int>>& triangle, int crow, int ccol, vector<vector<int>>& dp, int n){
+        if(ccol>=n || ccol<0) 
             return INT_MAX;
         
-        if(cr>=n)
+        if(crow>=n)
             return 0;
         
-        if(dp[cr][cl] != -1)
-            return dp[cr][cl];
+        if(dp[crow][ccol] != -1)
+            return dp[crow][ccol];
         
+        int scol=sum(triangle, crow+1, ccol, dp, n);
+        int ncol=sum(triangle, crow+1, ccol+1, dp, n);
         
-        int c1 = getMin(dp, t, cr+1, cl, n);
-        int c2 = getMin(dp, t, cr+1, cl+1, n);
+        dp[crow][ccol]=triangle[crow][ccol]+min(scol, ncol);
         
-        dp[cr][cl] =  min(c1, c2) + t[cr][cl];
-        
-        return dp[cr][cl];
-        
+        return dp[crow][ccol];
     }
+    
 };
