@@ -33,11 +33,9 @@ public:
             }
             
             
-            else{
+            else
                 st.push(temp+"/");
-                // st.push("/");
-            }
-            show(st);
+
         }
 
         
@@ -52,21 +50,10 @@ public:
         if(res.size()==0)
             res.push_back('/');
         
-        cout << "res: " << res << endl;
         
         return res;
         
     }
     
-    void show(stack<string> st){
-        string res="";
-        while(!st.empty()){
-            res+= st.top();
-            st.pop();
-        }
-        
-        reverse(res.begin(), res.end());
-        cout << res << endl;
-    }
     
 };
