@@ -1,14 +1,14 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int n) {
-        vector<int> dp(++n);
+        vector<int> dp(++n, INT_MAX);
         
         dp[0]=0;
         
         sort(coins.begin(), coins.end());
         
         for(int i=1; i<n; i++){
-            dp[i] = INT_MAX;
+       
             for(int c: coins){
                 if(i-c<0)
                     break;
