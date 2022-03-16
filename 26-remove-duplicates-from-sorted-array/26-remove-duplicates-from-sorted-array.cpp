@@ -4,13 +4,15 @@ public:
         if(nums.size()<2)
             return 1;
         
-        for(int i=0; i<nums.size()-1; ){
-            if(nums[i]==nums[i+1])
-                nums.erase(nums.begin()+i+1);
-            else
-                i++;
+        int l=0;
+        
+        for(int r=0; r<nums.size(); r++){
+            if(nums[l]!=nums[r]){
+                l++;
+                nums[l]=nums[r];
+            }
         }
         
-        return nums.size();
+        return l+1;
     }
 };
