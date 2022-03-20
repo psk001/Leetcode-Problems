@@ -11,11 +11,18 @@ public:
             pv[i-'a']++;
         
         int n=s.size(), m=p.size();
+        vector<int> sv(26);
+
+        for(int i=0; i<m; i++){
+            sv[s[i]-'a']++;
+        }
         
-        for(int i=0; i<=n-m; i++){
-            vector<int> sv(26);
-            for(int j=0; j<m; j++)
-                sv[s[i+j]-'a']++;
+        if(eq(sv, pv))
+            res.push_back(0);   
+        
+        for(int i=1; i<=n-m; i++){
+            sv[s[i-1]-'a']--;
+            sv[s[i+m-1]-'a']++;
                 
             if(eq(sv, pv))
                 res.push_back(i);
