@@ -1,28 +1,25 @@
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        int n=nums.size();
+        if(nums.size()==1)
+            return {{}, {nums[0]}};
         
-        vector<vector<int> > res;
-        vector<int> temp;
-        
-        getSubsets(temp, n-1, nums, res);
+        vector<vector<int> >  res;
+        vector<int> t;
+        getSub(nums, res, 0, t);
         
         return res;
-        
     }
     
-    void getSubsets(vector<int> temp, int n, vector<int>  nums, vector<vector<int> >& res){
-        if(n<0){
+    void getSub(vector<int>& nums, vector<vector<int> > &res, int idx, vector<int> temp){
+        if(idx==nums.size()){
             res.push_back(temp);
-            return;
+            return ;
         }
         
-        getSubsets(temp, n-1, nums, res);
-        temp.push_back(nums[n]);
-        getSubsets(temp, n-1, nums, res);
-        
+        getSub(nums, res, idx+1, temp);
+        temp.push_back(nums[idx]);
+        getSub(nums, res, idx+1, temp);
+            
     }
-    
-    
 };
