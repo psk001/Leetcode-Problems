@@ -15,14 +15,13 @@ public:
             
             if(people[l]+people[r]<=limit){
                 l++;
-                r--;
-                res++;    
+                r--;    
             }
             
-            else{
-                res++;
+            else
                 r--;
-            }
+    
+            res++;
         }
         
         return res;
