@@ -3,15 +3,15 @@ public:
     int countQuadruplets(vector<int>& nums) {
         int res=0;
         int n=nums.size();
-      
-        for(int i=0; i<n; i++)
-            for(int j=i+1; j<n; j++)
-                for(int k=j+1; k<n; k++)
-                    for(int l=k+1; l<n; l++)
-                        if(nums[i]+nums[j]+nums[k]==nums[l]){
-                            res++;
-                            // cout << i << " " << j << " " <<  k<< " " << l << endl;
-                        }      
+        unordered_map<int, int> col;
+        
+        for(int b=1; b<n-2; b++){
+            for(int a=0; a<b; a++)
+                col[nums[a]+nums[b]]++;
+            
+            for(int d=b+2; d<n; d++)
+                res +=col[nums[d]-nums[b+1]];
+        }
         return res;
     }
 };
