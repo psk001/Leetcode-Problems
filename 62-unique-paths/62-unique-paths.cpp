@@ -1,24 +1,28 @@
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        vector<vector<int> > dp(m, vector<int> (n, 0));
-        dp[0][0]=1;
+        vector<vector<int>> dp(m, vector<int>(n, -1));
         
-        return numPath(m-1, n-1, dp);
+        return getPath(m, n, 0, 0, dp);
     }
     
-    static int numPath(int m, int n, vector<vector<int> > &dp){
-        if(m==0 and n==0)
-            return 1;
-        
-        if(m<0 || n<0)
+    int getPath(int m, int n, int row, int col, vector<vector<int>>& dp){
+        if(row>=m || col>=n)
             return 0;
         
-        if(dp[m][n]>0)
-            return dp[m][n];
+        if(row==m-1 and col==n-1)
+            return 1;
         
-        dp[m][n]=numPath(m-1, n, dp) + numPath(m, n-1, dp);
+        if(dp[row][col] != -1)
+            return dp[row][col];
         
-        return dp[m][n];
+        int gpr=getPath(m, n, row, col+1, dp);
+        int gpb=getPath(m, n, row+1, col, dp);
+        
+        dp[row][col]=gpr+gpb;
+        
+        return dp[row][col];
+        
     }
+    
 };
