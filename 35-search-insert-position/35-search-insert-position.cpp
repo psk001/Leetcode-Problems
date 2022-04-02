@@ -1,20 +1,34 @@
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        return bin(nums, target, 0, nums.size());
-    }
-    
-    int bin(vector<int>& a, int t, int l, int h){
-        if(l>=h)
-            return l;
-        int mid = (l+h)/2;
+        int l=0, r=nums.size()-1;
+        if(target>nums[r])
+            return r+1;
         
-        if(a[mid]==t)
+        if(target<nums[0])
+            return 0;
+        
+        int mid;
+        while(l<=r){
+            mid=l+(r-l)/2;
+            if(nums[mid]==target)
+                return mid;
+            
+            else if(nums[mid]<target)
+                l=mid+1;
+            else
+                r=mid-1;
+            // cout << "inside while -- mid: " << mid << endl;
+        }
+            // cout << "l: " << l << " r: " << r << " mid: " << mid << endl;
+        if(target>nums[mid])
+            return mid+1;
+        
+        if(target==nums[mid])
             return mid;
         
-        else if(a[mid]>t)
-            return bin(a, t, l, h-1);
         
-        return bin(a, t, l+1, h);
+        
+        return mid;
     }
 };
