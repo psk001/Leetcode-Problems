@@ -1,24 +1,20 @@
 class Solution {
 public:
-    int peakIndexInMountainArray(vector<int>& a) {
-        int l=0, r=a.size()-1;
-       
+    int peakIndexInMountainArray(vector<int>& arr) {
+        int l=0, r=arr.size()-1;
+        
         while(l<=r){
-            int m=l+(r-l)/2;
-          
-            if(a[m]>a[m+1] and a[m]>a[m-1])
-                return m;
+            int mid=l+(r-l)/2;
+            if(arr[mid]>arr[mid+1] and arr[mid]>arr[mid-1])
+                return mid;
             
-            if(a[m]<a[m+1])
-                l=m+1;
-            
+            if(arr[mid]<arr[mid+1])
+                l=mid+1;
             else
-                r=m-1;
-            
-           // cout << "curr l: " << l << " curr r: " << r <<  " curr m: " << m << endl;
+                r=mid-1;
+            // cout << "l: " << l << " r: " << r << " mid: " << mid << endl;
         }
         
-        return 0;
-
+        return -1;
     }
 };
