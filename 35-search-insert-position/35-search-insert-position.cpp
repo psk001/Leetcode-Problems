@@ -18,9 +18,8 @@ public:
                 l=mid+1;
             else
                 r=mid-1;
-            // cout << "inside while -- mid: " << mid << endl;
         }
-            // cout << "l: " << l << " r: " << r << " mid: " << mid << endl;
+         
         if(target>nums[mid])
             return mid+1;
         
