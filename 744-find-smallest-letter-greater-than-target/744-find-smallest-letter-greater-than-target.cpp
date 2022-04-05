@@ -6,20 +6,22 @@ public:
             return lt[0];
         if(target>=lt[lt.size()-1])
             return lt[0];
+
         
-        for(auto i: lt)
-            if(i>target)
-                return i;
+        int l=0, r=lt.size(), res;
+        while(l<r){
+            int m=l+(r-l)/2;
+            if(lt[m]<=target){
+                l=m+1;
+                res=m;
+            }
+            else
+                r=m;
+        }
         
-        return lt[0];
+        res=(res==lt.size()-1)?0 : (res+1);
         
-//         int l=0, r=lt.size(), res, m;
-//         while(l<r){
-//         }
-        
-//         res=(res==lt.size()-1)?0 : (res+1);
-        
-//         return lt[res];
+        return lt[res];
         
     }
 };
