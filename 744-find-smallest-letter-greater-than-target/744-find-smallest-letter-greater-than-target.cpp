@@ -7,32 +7,19 @@ public:
         if(target>=lt[lt.size()-1])
             return lt[0];
         
-        int i=0;
-        while(lt[i]<=target)
-            i++;
+        for(auto i: lt)
+            if(i>target)
+                return i;
         
-        // i=(i==lt.size()-1)?0: (i);
+        return lt[0];
         
-        return lt[i];
-        
-//         int l=0, r=lt.size()-1, res, m;
+//         int l=0, r=lt.size(), res, m;
 //         while(l<r){
-//             m=l+(r-l)/2;
-            
-//             if(lt[m]==target){
-//                 res=m;
-//                 l=m+1;
-//             }
-//             else if(lt[m]>target)
-//                 r=m;
-//             else
-//                 l=m+1;
-//             // cout << "l: " << l << " r: " << r << " m: " << m << " res: " << res << endl;
 //         }
         
-        // res=(res==lt.size()-1)?0 : (res+1);
+//         res=(res==lt.size()-1)?0 : (res+1);
         
-        // return lt[m];
+//         return lt[res];
         
     }
 };
