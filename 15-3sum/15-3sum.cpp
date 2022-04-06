@@ -13,6 +13,9 @@ public:
         // map<int, int> col;
         
         for(int i=0; i<nums.size()-2; i++){
+            if(nums[i]>0)
+                break;
+            
             int req = -1*nums[i];
             int l=i+1, r=nums.size()-1;
             
