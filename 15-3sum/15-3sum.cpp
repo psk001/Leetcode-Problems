@@ -1,39 +1,37 @@
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& a) {
-        vector<vector<int> > res;
-       
-        int n=a.size();
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        if(nums.size()<3)
+            return {};
         
-        if(n<3)
-            return res;
+        sort(nums.begin(), nums.end());
         
-        cout << "current size: " << n << endl;
+        if(nums[0]>0)
+            return {};
         
-        sort(a.begin(), a.end());
-        if(a[0]>0)
-            return res;
+        set<vector<int>> rs;
+        // map<int, int> col;
         
-        unordered_map<int, int> col;
-        
-        for(int i = 0 ; i < n ; ++i){    
-            col[a[i]] = i;
+        for(int i=0; i<nums.size()-2; i++){
+            int req = -1*nums[i];
+            int l=i+1, r=nums.size()-1;
+            
+            while(l<r){
+                if(nums[l]+nums[r]==req){
+                    rs.insert({nums[i], nums[l], nums[r]});
+                    l++;
+                    r--;
+                }
+
+                else if(nums[l]+nums[r]<req)
+                    l++;
+                else 
+                    r--;
+            }
         }
-        
-       for(int i=0; i<n; i++){
-            for(int j=i+1; j<n; j++){
-                int lk = -1*(a[i]+a[j]);
-                
-                if(col.count(lk) && col.find(lk)->second > j){
-                    vector<int> t{a[i], a[j], lk};
-                    res.push_back(t);
-                }   
-                j = col.find(a[j])->second;
-            }  
-           i=col.find(a[i])->second;
-        }        
-        
+        vector<vector<int>> res(rs.begin(), rs.end());
         
         return res;
     }
+    
 };
