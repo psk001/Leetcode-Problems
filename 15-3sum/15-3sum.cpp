@@ -9,30 +9,41 @@ public:
         if(nums[0]>0)
             return {};
         
-        set<vector<int>> rs;
-        // map<int, int> col;
+        vector<vector<int>> res;
+
         
-        for(int i=0; i<nums.size()-2; i++){
+        for(int i=0; i<nums.size(); i++){
+            
             if(nums[i]>0)
                 break;
             
-            int req = -1*nums[i];
+            if(i>0 and nums[i]==nums[i-1])
+                continue;
+            
             int l=i+1, r=nums.size()-1;
             
             while(l<r){
-                if(nums[l]+nums[r]==req){
-                    rs.insert({nums[i], nums[l], nums[r]});
+                int sum=nums[i]+nums[l]+nums[r];
+                
+                if(sum<0)
                     l++;
+                else if(sum>0)
                     r--;
+                
+                else{
+                    res.push_back({nums[i], nums[l], nums[r]});
+                    
+                    int clow=nums[l], chigh=nums[r];
+                    
+                    while(l<r and clow==nums[l])
+                        l++;
+                    
+                    while(l<r and chigh==nums[r])
+                        r--;
                 }
-
-                else if(nums[l]+nums[r]<req)
-                    l++;
-                else 
-                    r--;
             }
         }
-        vector<vector<int>> res(rs.begin(), rs.end());
+        
         
         return res;
     }
