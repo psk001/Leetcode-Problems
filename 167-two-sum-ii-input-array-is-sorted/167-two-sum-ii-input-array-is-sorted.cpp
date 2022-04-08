@@ -5,12 +5,13 @@ public:
         int l=0, r=n.size()-1;
         
         while(l<r){
-            if(n[l]+n[r] == target){
+            int s=n[l]+n[r];
+            if(s == target){
                 res[0]=l+1, res[1]=r+1;
                 break;
             }
             
-            else if(n[l]+n[r] > target)
+            else if(s > target)
                 r--;
             else
                 l++;               
