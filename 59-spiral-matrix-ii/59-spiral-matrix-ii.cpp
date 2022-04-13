@@ -1,44 +1,51 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int> > res(n, vector<int> (n));
+        vector<vector<int>> res(n, vector<int>(n, 0));
         
-        int left=0, top=0, right=n-1, bottom=n-1;
-        int curr=1;
-        int dir=1;
+        int top=0, left=0, right=n-1, bottom=n-1;
+        int lr=1, tb=0, rl=0, bt=0;
+        int k=1;
         
         while(top<=bottom and left<=right){
-            
-            if(dir==1){
-                for(int i=left; i<=right; i++)
-                    res[top][i]=curr++;
+            if(lr){
+                for(int i=left; i<=right; i++){
+                    res[top][i]=k;
+                    k++;
+                }
+                lr=0, tb=1;
                 top++;
-                dir=2;
             }
-            
-            else if(dir==2){
-                for(int i=top; i<=bottom; i++)
-                    res[i][right]=curr++;
-                right--;
-                dir=3;
-            }
-            
-            else if(dir==3){
-                for(int i=right; i>=left; i--)
-                    res[bottom][i]=curr++;
-                bottom--;
-                dir=4;
-            }
-            
-            else if(dir==4){
-                for(int i=bottom; i>=top; i--)
-                    res[i][left]=curr++;
-                left++;
-                dir=1;
-            }
-            
-        }     
-        return res;
         
+            if(tb){
+            
+                for(int i=top; i<=bottom; i++){
+                    res[i][right]=k;
+                    k++;
+                }
+                tb=0, rl=1;
+                right--;                
+            }
+            
+            if(rl){
+                for(int i=right; i>=left; i--){
+                    res[bottom][i]=k;
+                    k++;
+                }
+                rl=0, bt=1;
+                bottom--;                
+            }
+            if(bt){
+            
+                for(int i=bottom; i>=top; i--){
+                    res[i][left]=k;
+                    k++;
+                }
+                bt=0, lr=1;
+                left++;                
+            }
+        }
+        
+        return res;
     }
 };
