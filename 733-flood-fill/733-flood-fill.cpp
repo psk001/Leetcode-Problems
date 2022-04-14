@@ -1,31 +1,33 @@
 class Solution {
+    int nColor,m,n, cColor;
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
-        int color=image[sr][sc];
+        nColor=newColor;
+        m=image.size(), n=image[0].size();
+        vector<vector<int>> res=image; // (m, vector<int>(n, 0))
+        cColor=image[sr][sc];
         
-        if(color != newColor)
-            dfs(image, sr, sc, color, newColor);
+        fill(image, res, sr, sc);
         
-        return image;
+        return res;
     }
     
-    void dfs(vector< vector<int> >& img, int sr, int sc, int color, int newColor){
-        if(img[sr][sc]==color){
-            img[sr][sc]=newColor;
-            
-            if(sr>0) 
-                dfs(img, sr-1, sc, color, newColor);
-            
-            if(sc>0)
-                dfs(img, sr, sc-1, color, newColor);
-            
-            if(sr+1<img.size())
-                dfs(img, sr+1, sc, color, newColor);
-            
-            if(sc+1<img[0].size())
-                dfs(img, sr, sc+1, color, newColor);
-            
+    void fill(vector<vector<int>>&image, vector<vector<int>>&res, int cr, int cc){
+        // cout << "curr row: " << cr << " curr col: " << cc << endl;
+        
+        if(cr>=m or cc>=n or cr<0 or cc<0)
+            return;
+        
+        if(res[cr][cc]==nColor or res[cr][cc] != cColor)
+            return;
+        
+        if(image[cr][cc]==cColor){
+            res[cr][cc]=nColor;
         }
+                
+        fill(image, res, cr+1, cc);
+        fill(image, res, cr-1, cc);
+        fill(image, res, cr, cc+1);
+        fill(image, res, cr, cc-1);
     }
-    
 };
