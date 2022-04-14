@@ -1,34 +1,39 @@
 class Solution {
-    int result=0;
+    int result=0, m, n;
 public:
     int numIslands(vector<vector<char>>& grid) {
-        int res=0;
         
-        for(int i=0; i<grid.size(); i++){
-            for(int j=0; j<grid[0].size(); j++)
+        m=grid.size(), n=grid[0].size();
+        
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
                 if(grid[i][j]=='1'){
-                    getNum(grid, i, j);
-                    res++;
+                    result++;
+                    fill(grid, i, j);
                 }
+            }
         }
-        return res;
+        
+        return result;
         
     }
     
-    void getNum(vector<vector<char>>& grid, int row, int col){
-        if(row>= grid.size() || col>=grid[0].size() || row<0 || col<0)
+    void fill(vector<vector<char>>& grid, int cr, int cc){
+        if(cr>=m or cc>=n or cr<0 or cc<0)
             return;
         
-        if(grid[row][col]=='0' || grid[row][col]=='2')
+        if(grid[cr][cc]=='0')
             return;
         
-        grid[row][col]='2';
+        grid[cr][cc]='0';
         
-        getNum(grid, row-1, col);
-        getNum(grid, row+1, col);
-        getNum(grid, row, col+1);
-        getNum(grid, row, col-1);
+        fill(grid, cr+1, cc);
+        fill(grid, cr, cc+1);
+        fill(grid, cr-1, cc);
+        fill(grid, cr, cc-1);
         
     }
+    
+
     
 };
