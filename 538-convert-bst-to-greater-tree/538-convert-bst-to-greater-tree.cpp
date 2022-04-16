@@ -11,47 +11,47 @@
  */
 class Solution {
 public:
-    vector<int> val;
-    map<int, int> gt;
-    
     TreeNode* convertBST(TreeNode* root) {
         if(not root)
-            return root;
+            return nullptr;
         
-        iterate(root);
-        sort(val.begin(), val.end());
+        vector<int> in;
+        ino(in, root);
         
-        gt[val[val.size()-1]]=val[val.size()-1];
+        map<int, int> col;
         
-        for(int i=val.size()-2; i>=0; i--){
-            int k=val[i]+val[i+1];
-            gt[val[i]]=k;
-            val[i]=k;
+        col[in[in.size()-1]]=in[in.size()-1];
+        
+        for(int i=in.size()-2; i>=0; i--){
+            col[in[i]]=in[i]+in[i+1];
+            in[i]=in[i]+in[i+1];
         }
         
-        grt(root);
+        // for(auto i: in)
+        //     cout << i << " " ;
+        // cout << endl;
+        
+        convert(root, col);
         
         return root;
+        
     }
     
-    void iterate(TreeNode* root){
+    void convert(TreeNode* root, map<int, int>& col){
         if(not root)
             return;
         
-        val.push_back(root->val);
-        
-        iterate(root->left);
-        iterate(root->right);
+        root->val=col[root->val];
+        convert(root->left, col);
+        convert(root->right, col);
     }
     
-    void grt(TreeNode* root){
+    void ino(vector<int>& in, TreeNode* root){
         if(not root)
             return;
         
-        root->val = gt[root->val];
-        
-        grt(root->left);
-        grt(root->right);        
+        ino(in, root->left);
+        in.push_back(root->val);
+        ino(in, root->right);
     }
-    
 };
