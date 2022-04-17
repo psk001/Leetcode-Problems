@@ -10,28 +10,35 @@
  * };
  */
 class Solution {
+    vector<int> in;
 public:
-    TreeNode* curr;
     TreeNode* increasingBST(TreeNode* root) {
-        if(not root)
-            return root;
+        ino(root);
         
-        TreeNode* res=new TreeNode(0);
-        curr=res;
+        root->val=in[0];
+        TreeNode* temp=root;
+        for(int i=1; i<in.size(); i++){
+            if(temp->left)
+                temp->left=nullptr;
+            
+            if(temp->right)
+                temp->right->val = in[i];
+            
+            else
+                temp->right = new TreeNode(in[i]);
+            
+            temp = temp->right;
+        }
         
-        inorder(root);
-        return res->right;
+        return root;
     }
     
-    void inorder(TreeNode* root){
+    void ino(TreeNode* root){
         if(not root)
             return;
         
-        inorder(root->left);
-        root->left=nullptr;
-        curr->right=root;
-        curr=root;
-        
-        inorder(root->right);
+        ino(root->left);
+        in.push_back(root->val);
+        ino(root->right);
     }
 };
