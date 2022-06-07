@@ -11,12 +11,34 @@ public:
             nums1=nums2;
             return;
         }
-                
-        nums1.erase(nums1.begin()+m, nums1.end());
-        nums1.insert(nums1.begin(), nums2.begin(), nums2.end());
         
-        sort(nums1.begin(), nums1.end());
+        int i=0, j=0;
         
+        while(i<m+n and j<n){
+            if(nums1[i]>nums2[j]){
+                int prev=m+n-1;
+                while(prev>=i and prev>0){
+                    nums1[prev]=nums1[prev-1];
+                    prev--;                   
+                }
+                nums1[i]=nums2[j];
+                j++;
+            } 
+            
+            i++;
+            // cout << "i: " << i << " j: " << j << endl;
+            // for(auto i: nums1)
+            //     cout << i << " ";
+            // cout << endl;
+        }
+        
+        if(j!=n){
+            i-=n-j;
+            while(j!=n){
+                nums1[i]=nums2[j];
+                i++, j++;
+            }
+        }
         return;
     }
 };
