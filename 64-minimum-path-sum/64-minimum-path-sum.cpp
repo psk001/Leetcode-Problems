@@ -1,34 +1,28 @@
 class Solution {
+    int m,n;
 public:
     int minPathSum(vector<vector<int>>& grid) {
-        int m=grid.size(), n=grid[0].size();
-        vector< vector<int> > res(m , vector<int> (n, -1));
-        
-      //  int res = getSum(m-1, n-1, grid, res);
-        
-        return getSum(m-1, n-1, grid, res);
+        m= grid.size(), n=grid[0].size();
+        vector<vector<int>>dp(m, vector<int>(n, 0));
+                    
+        return getSum(grid, dp, 0, 0);;
     }
     
-    int getSum(int m, int n, vector<vector<int>>& grid, vector< vector<int>>& res){
-        if(m<0 or n<0)
-            return INT_MAX ;
+    int getSum(vector<vector<int>>& grid, vector<vector<int>>& dp, int row, int col){
+        if(row>=m || col>=n)
+            return INT_MAX;
+                
+        if(row==m-1 and col==n-1)
+            return grid[row][col]+dp[row][col];
         
-        if(m==0 and n==0)
-            return grid[m][n];
+        if(dp[row][col] !=0)
+            return dp[row][col];
         
-        if(res[m][n] != -1)
-            return res[m][n];
+        int nextRow= getSum(grid, dp, row+1, col);
+        int nextCol= getSum(grid, dp, row, col+1);
+      
+        dp[row][col]=grid[row][col]+min(nextRow, nextCol);
         
-        int d=getSum(m-1, n, grid, res);
-        int r=getSum(m, n-1, grid, res);
-        
-        int rs=min(d, r)+grid[m][n];
-        
-        res[m][n] = rs;
-        
-        return rs;
-        
+        return dp[row][col];  //7300599801
     }
 };
-
-
