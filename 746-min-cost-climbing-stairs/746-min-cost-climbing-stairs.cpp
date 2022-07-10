@@ -2,11 +2,8 @@ class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost) {
         vector<int> dp(cost.size(), -1);
-        
-        int s1=getSum(cost, dp, 0);
-        int s2=getSum(cost, dp, 1);
-        
-        return min(s1, s2);
+                
+        return min(getSum(cost, dp, 0) , getSum(cost, dp, 1));
         
     }
     
