@@ -15,31 +15,27 @@ public:
         if(not root)
             return {};
         
-        vector<int> res;
-        
         queue<TreeNode*> q;
-        int len;
-        
         q.push(root);
         
-        while(!q.empty()){
-            len=q.size();
-            int k;
-            for(int i=0; i<len; i++){
-                TreeNode* temp=q.front();
+        vector<int> res;
+        
+        while(q.size()){
+            int p= q.size(), r;
+            for(int i=0; i<p; i++){
+                TreeNode* temp= q.front();
                 q.pop();
-              
-                k=temp->val;
+                
+                r= temp->val;
+                
                 if(temp->left)
                     q.push(temp->left);
                 if(temp->right)
-                    q.push(temp->right);    
-            }           
-            
-            res.push_back(k);
+                    q.push(temp->right);
+            }
+            res.push_back(r);
         }
         
         return res;
-        
     }
 };
