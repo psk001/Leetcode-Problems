@@ -11,16 +11,21 @@
  */
 class Solution {
     vector<vector<int>> st;
+    int res=0;
 public:
     int pseudoPalindromicPaths (TreeNode* root) {
         vector<int> col(10, 0);
-        path(root, col);
-                
-        int res=0;
+        path(root, col);      
         
-        for(auto i: st){
+        return res;
+    }
+    
+    void path(TreeNode* root, vector<int> col){
+        if(!root->left and !root->right){
+            col[root->val]++;
+            // st.push_back(col);
             int ev=0, od=0;
-            for(auto j: i){
+            for(auto j: col){
                 if(j==0)
                     continue;
                 // cout << j << " ";
@@ -32,15 +37,7 @@ public:
             // cout << endl << "even: " << ev << " od: " << od << endl;
             if(od==0 || od==1)
                 res++;
-        }        
-        
-        return res;
-    }
-    
-    void path(TreeNode* root, vector<int> col){
-        if(!root->left and !root->right){
-            col[root->val]++;
-            st.push_back(col);
+  
             return;
         }
         
