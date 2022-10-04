@@ -13,16 +13,26 @@ class Solution {
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
         if(not root)
-            return 0;
+            return false;
         
-        vector<int> st;      
-        
-        int curr=targetSum-root->val;
-        
-        if(curr==0 && not root->left and not root->right)
+        return hasPathSum1(root, targetSum);
+    }
+    
+    bool hasPathSum1(TreeNode* root, int targetSum){
+        // cout << "root val: " << root->val << " targetSum: " << targetSum << endl;
+        if(root->left==NULL and root->right==NULL and targetSum==root->val)
             return true;
         
-        return (hasPathSum(root->left, curr) or (hasPathSum(root->right, curr)));
+        if(root->left==NULL and root->right==NULL and targetSum!=root->val)
+            return false;        
         
+        bool lt, rt;
+        if(root->left)
+            lt= hasPathSum(root->left, targetSum-root->val);
+        
+        if (root->right)
+            rt= hasPathSum(root->right, targetSum-root->val);
+        
+        return (lt or rt);
     }
 };
