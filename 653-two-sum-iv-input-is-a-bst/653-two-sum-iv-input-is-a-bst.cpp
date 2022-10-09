@@ -10,33 +10,32 @@
  * };
  */
 class Solution {
+    vector<int> in;
 public:
     bool findTarget(TreeNode* root, int k) {
-        if(not root)
-            return false;
-        
-        set<int> col;
-        hsh(root, col);
-        for(auto i: col)
-            cout << i << " ";
-        for(auto i: col){
-            if(k-i==i)
-                continue;
-             if(col.find(k-i) != col.end())            
+        ino(root);
+
+        int l=0, r=in.size()-1;
+        while(l<r){
+            int sm= in[l]+in[r];
+            // cout << "l: " << l << " r: " << r << " sm: " << sm << endl;
+            if(sm<k)
+                l++;
+            else if(sm>k)
+                r--;
+            else
                 return true;
         }
         
         return false;
-       
     }
     
-    void hsh(TreeNode* root, set<int>& col){
+    void ino(TreeNode* root){
         if(not root)
             return;
         
-        col.insert(root->val);
-        hsh(root->left, col);
-        hsh(root->right, col);
+        ino(root->left);
+        in.push_back(root->val);
+        ino(root->right);
     }
-
 };
