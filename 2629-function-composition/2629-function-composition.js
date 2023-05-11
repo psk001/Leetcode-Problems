@@ -10,9 +10,9 @@ var compose = function(functions) {
         let n= functions.length;
         let res= x;
         
-        for(let i=n-1; i>=0; i--){
-            let a= functions[i];
-            res= a(res);
+        for(const func of functions.reverse()){
+            
+            res= func(res);
         }
         
         return res;
