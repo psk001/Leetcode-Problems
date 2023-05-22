@@ -21,7 +21,7 @@ public:
         for(int i=0; i<k; i++)
             res.push_back(r[i].first);
         
-        
+        r.clear();
         return res;
     }
     
