@@ -2,30 +2,25 @@ class Solution {
 public:
     int sm;
     bool stoneGame(vector<int>& piles) {
-        // map< pair<int, int>, int> st;
-        // sm= accumulate(piles.begin(), piles.end(), 0);
-        // return cpm(0, 0, piles.size()-1, piles, st);
-        return true;
+        int n= piles.size();
+        
+        int dp[n+2][n+2];
+        memset(dp, 0, sizeof(dp));
+        
+        for(int size=1; size<=n; size++){
+            for(int i=0, j=size-1; j<n; i++, j++){
+                int chance= (j+i+n)%2;
+                
+                if(chance==1){
+                    dp[i+1][j+1]= max(piles[i]+dp[i+2][j+1], piles[j]+dp[i+1][j]);
+                }else{
+                    dp[i+1][j+1]= min(-piles[i]+dp[i+2][j+1], -piles[j]+dp[i+1][j]);
+                }
+                
+            }
+        }
+       
+        return dp[1][n]>0;
     }
     
-    int cpm(int ac, int start, int end, vector<int>& p, map<pair<int, int>,int>& st){
-        if(start>=end)
-            return ac>sm/2;
-        
-        
-        if(st[{start, end}]!=0)
-            return st[{start, end}];
-        
-
-        int asbs= cpm(ac+p[start], start+2, end, p, st);
-        int asbe= cpm(ac+p[start], start+1, end-1, p, st);
-
-        int aebs= cpm(ac+p[end], start+1, end-1, p, st);
-        int aebe= cpm(ac+p[end], start, end-2, p, st);
-
-        st[{start, end}]= ( asbs || asbe || aebs || aebe );
-
-        return st[{start, end}];
-
-    }
 };
