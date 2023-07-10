@@ -12,24 +12,19 @@
 class Solution {
 public:
     int minDepth(TreeNode* root) {
-        return getDepth(root);
+        return dfs(root);
     }
     
-    int getDepth(TreeNode* root) {
+    int dfs(TreeNode* root) {
         if(!root)
             return 0;
+                        
+        if(!root->left)
+            return 1+dfs(root->right);
         
-        if(!root->left and !root->right)
-            return 1;
+        if(!root->right)
+            return 1+dfs(root->left);
         
-        int lm=INT_MAX, rm=INT_MAX;
-        
-        if(root->left)
-            lm= 1+ getDepth(root->left);
-        
-        if(root->right)
-            rm= 1+getDepth(root->right);
-        
-        return min(lm, rm);
+        return 1+min(dfs(root->left), dfs(root->right));
     }
 };
