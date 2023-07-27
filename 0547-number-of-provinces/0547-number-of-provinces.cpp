@@ -1,27 +1,37 @@
 class Solution {
 public:
-    int findCircleNum(vector<vector<int>>& grid) {
+    int findCircleNum(vector<vector<int>>& g) {
+        int n= g.size();
+        
         int res=0;
-        vector<int> visited(grid.size(), 0);
+        vector<int> visited(n);
         
-        for(int i=0; i<grid.size(); i++){
+        for(int i=0; i<n; i++){
             if(!visited[i]){
-                dfs(grid, visited, i);
                 res++;
+                bfs(g, visited, i);
             }
-            
         }
-        
         return res;
     }
     
-    void dfs(vector<vector<int>>& grid, vector<int>& visited, int idx){
-
-        visited[idx]=1;
+    void bfs(vector<vector<int>>& g, vector<int>& visited, int start){
+        visited[start]=1;
         
-        for(int i=0; i<grid.size(); i++)
-            if(grid[idx][i] and !visited[i])
-                dfs(grid, visited, i);
+        queue<int> q;      
+        q.push(start);
+        
+        while(!q.empty()){
+            int node= q.front();
+            q.pop();
+            
+            for(int i=0; i<g.size(); i++){
+                if(g[node][i]==1 and !visited[i]){
+                    visited[i]=1;
+                    // dfs(g, visited, i);
+                    q.push(i);
+                }
+            }
+        }
     }
-    
 };
