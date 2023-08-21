@@ -11,6 +11,9 @@ public:
         for(int i=0; i<n/2; i++){
             temp+=s[i];
             
+            if(n%(i+1)!=0)
+                continue;
+            
             int m= n/(i+1);
             
             string p= kp(m, temp);
