@@ -4,8 +4,6 @@ public:
         if(n<=1)
             return n;
         
-        
-        
         int a=0, b=1, res;
         
         for(int i=2; i<=n; i++){
@@ -14,7 +12,6 @@ public:
             b=res;
         }
             
-        
         return res;
     }
 };
