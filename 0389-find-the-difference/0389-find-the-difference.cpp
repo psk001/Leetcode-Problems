@@ -1,19 +1,13 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        sort(s.begin(), s.end());
-        sort(t.begin(), t.end());
+        string p= s+t;
         
-        int i=0, j=0, m=s.size(), n= m+1;
+        char y= p[0];
         
-        while(i<m and j<n){
-            if(s[i]!=t[j])
-                return t[j];
-            
-            i++, j++;
-        }
+        for(int i=1; i<p.size(); i++)
+            y^=p[i];
         
-        
-        return t[m];
+        return y;
     }
 };
