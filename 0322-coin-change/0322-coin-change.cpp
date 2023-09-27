@@ -10,14 +10,11 @@ public:
     }
     
     int ncoin(vector<int>& c, vector<vector<int>>& dp, int idx, int t){
-      
-        if(t<0)
-            return INT_MAX-1;
-        
+              
         if(t==0)
             return 0;
         
-        if(idx==c.size())
+        if(idx==c.size() or t<0)
             return INT_MAX-1;
         
         if(dp[t][idx]!=-1)
