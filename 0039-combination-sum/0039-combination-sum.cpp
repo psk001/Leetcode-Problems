@@ -20,7 +20,7 @@ public:
     void ss(vector<int>& cd, set<vector<int>>& s, vector<int> p, int idx, int t){
         if(t==0){
             s.insert(p);
-            // return;
+            return;
         }
         
         if(idx==cd.size())
