@@ -1,11 +1,11 @@
 class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        set<vector<int>> s;
         sort(nums.begin(), nums.end());
-        vector<vector<int>> res;
-        res.push_back({});
         
+        set<vector<int>> s;
+        vector<vector<int>> res;
+                
         vector<int> t;
         ss(nums, s, 0, t);
         
@@ -16,15 +16,13 @@ public:
     }
     
     void ss(vector<int>& nums, set<vector<int>>& s, int idx, vector<int> temp){
-        if(idx==nums.size())
+        if(idx==nums.size()){
+            s.insert(temp);
             return;
-        
-        temp.push_back(nums[idx]);
-        s.insert(temp);
-        
+        }
+            
         ss(nums, s, idx+1, temp);
-        
-        temp.erase(temp.begin()+temp.size()-1);
+        temp.push_back(nums[idx]);
         ss(nums, s, idx+1, temp);
         
         return;
