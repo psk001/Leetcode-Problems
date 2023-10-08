@@ -1,17 +1,17 @@
 class Solution {
 public:
     int maxProfit(vector<int>& A) {
-         int n=A.size();
-    if(n<=1)
-        return 0;
+       int n= A.size();
         
-    int cmax=A[n-1], res=INT_MIN;
-    
-    for(int i=n-1; i>=0; i--){
-        cmax= max(cmax, A[i]);
-        res= max(res, cmax-A[i]);
-    }
-    
-    return res;      
+        int res= INT_MIN;
+        int cmin= A[0];
+        
+        for(int i=0; i<n; i++){
+            cmin= min(cmin, A[i]);
+            res= max(res, A[i]-cmin);
+        }
+        
+        
+        return res;
     }
 };
